@@ -3,8 +3,10 @@ class Sportlane:
         self.nimi = nimi
         self.kaal = kaal
 
+
     def __str__(self):
         return f"Nimi: {self.nimi}, kaal: {self.kaal} kg."
+
 
 class Maadleja(Sportlane):
     def __init__(self, nimi, kaal):

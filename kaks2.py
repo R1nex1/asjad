@@ -43,18 +43,22 @@ def main():
             leia_parim(sõnastik)
 
         elif valik == "5":
-            try:
-                with open("punktid_uus.txt", "w") as f:
-                    for nimi, punktid in sõnastik.items():
-                        punktid_str = ' '.join(str(x) for x in punktid)
-                        f.write(f"{nimi} {punktid_str}\n")
-                print("Faili salvestatud. Programm lõpetas töö.")
-            except Exception as e:
-                print(f"Faili kirjutamisel tekkis viga: {e}")
+            salvesta_lõpeta(sõnastik,  "punktid_uus.txt")
             break
 
         else:
             print("Tundmatu valik. Palun proovi uuesti.")
+
+
+def salvesta_lõpeta(sõnastik, fail):
+    try:
+        with open(fail, "w") as f:
+            for nimi, punktid in sõnastik.items():
+                punktid_str = ' '.join(str(x) for x in punktid)
+                f.write(f"{nimi} {punktid_str}\n")
+            print("Faili salvestatud. Programm lõpetas töö.")
+    except Exception as e:
+        print(f"Faili kirjutamisel tekkis viga: {e}")
 
 
 def loe_seis(failinimi):
@@ -97,13 +101,7 @@ def leia_keskmine(nimi, sõnastik):
     if nimi not in sõnastik:
         print(f"Sellist korvpallurit ei ole sõnastikus.")
         return None
-    kogusumma = sum(sõnastik[nimi])
-    skoorid_arv = len(sõnastik[nimi])
-    if skoorid_arv == 0:
-        print("Skooride arv on 0, keskmist ei saa arvutada.")
-        return None
-    keskmine = kogusumma / skoorid_arv
-    return keskmine
+    return sum(sõnastik[nimi]) / len(sõnastik[nimi])
 
 
 def leia_parim(sõnastik):
